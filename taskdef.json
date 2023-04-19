@@ -1,0 +1,46 @@
+{
+  "containerDefinitions": [
+    {
+      "portMappings": [
+        {
+          "hostPort": 80,
+          "protocol": "tcp",
+          "containerPort": "<SERVICE_PORT>"
+        }
+      ],
+      "environment": [
+        {
+          "name": "IMAGE",
+          "value": "<IMAGE_NAME>"
+        },
+        {
+          "name": "COMMIT",
+          "value": "<COMMIT>"
+        },
+        {
+          "name": "BRANCH",
+          "value": "<BRANCH>"
+        },
+        {
+          "name": "ENVIRONMENT",
+          "value": "server"
+        },
+        {
+          "name": "PORT",
+          "value": "<SERVICE_PORT>"
+        },
+        {
+          "name": "NODE_ENV",
+          "value": "development"
+        }
+      ],
+      "image": "<IMAGE_NAME>",
+      "name": "<APP_NAME>"
+    }
+  ],
+  "executionRoleArn": "arn:aws:iam::<AWS_ACCOUNT_ID>:role/ECSTask",
+  "taskRoleArn": "arn:aws:iam::<AWS_ACCOUNT_ID>:role/ECSTask",
+  "family": "<APP_NAME>",
+  "requiresCompatibilities": ["FARGATE"],
+  "networkMode": "awsvpc"
+}

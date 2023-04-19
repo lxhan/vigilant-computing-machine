@@ -1,0 +1,64 @@
+name: Development
+
+on:
+  push:
+    branches:
+      - dev
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-22.04
+    environment: development
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v2
+
+      - name: Build, tag, and push image to Amazon ECR
+        id: build-image
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          IMAGE_TAG: ${{ github.sha }}
+        run: |
+          docker build -t $ECR_REGISTRY/${{ secrets.ECR_REPOSITORY }}:$IMAGE_TAG -t $ECR_REGISTRY/${{ ECR_REPOSITORY }}:dev .
+          docker push $ECR_REGISTRY/${{ secrets.ECR_REPOSITORY }}:$IMAGE_TAG
+          docker push $ECR_REGISTRY/${{ ECR_REPOSITORY }}:dev
+
+      - name: Generate files
+        run: |
+          # can be done in one line, separating for readability
+          sed -i -e 's%<COMMIT>%'"${{ github.sha }}"'%' -e 's%<BRANCH>%'"${{ github.ref }}"'%' taskdef.json
+          sed -i -e 's%<APP_NAME>%'"${{ secrets.APP_NAME }}"'%' -e  appspec.yml taskdef.json
+          sed -i -e 's%<SERVICE_PORT>%'"${{ secrets.SERVICE_PORT }}"'%' appspec.yml taskdef.json
+          sed -i -e 's%<AWS_ACCOUNT_ID>%'"${{ secrets.AWS_ACCOUNT_ID }}"'%' taskdef.json
+          sed -i -e 's%<IMAGE_NAME>%'"${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/${{ secrets.APP_NAME }}:dev"'%' taskdef.json
+
+      - name: Generate artifact
+        id: artifact
+        run: zip -j artifact.zip appspec.yaml taskdef.json
+
+      - name: Deploy to S3
+        uses: qoqa/action-s3-cp@v1.1
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_REGION: ${{ secrets.AWS_REGION }}
+          AWS_S3_BUCKET: ${{ secrets.S3_BUCKET }}
+          AWS_S3_PATH: "/artifact.zip"
+          FILE: "artifact.zip"
