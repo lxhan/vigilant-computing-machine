@@ -38,7 +38,7 @@ jobs:
         run: |
           docker build -t $ECR_REGISTRY/${{ secrets.ECR_REPOSITORY }}:$IMAGE_TAG -t $ECR_REGISTRY/${{ ECR_REPOSITORY }}:dev .
           docker push $ECR_REGISTRY/${{ secrets.ECR_REPOSITORY }}:$IMAGE_TAG
-          docker push $ECR_REGISTRY/${{ ECR_REPOSITORY }}:dev
+          docker push $ECR_REGISTRY/${{ secrets.ECR_REPOSITORY }}:dev
 
       - name: Generate files
         run: |
