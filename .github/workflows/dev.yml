@@ -51,7 +51,7 @@ jobs:
 
       - name: Generate artifact
         id: artifact
-        run: zip -j artifact.zip appspec.yaml taskdef.json
+        run: zip -j artifact.zip appspec.yml taskdef.json
 
       - name: Deploy to S3
         uses: qoqa/action-s3-cp@v1.1
