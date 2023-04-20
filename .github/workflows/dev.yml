@@ -45,7 +45,7 @@ jobs:
           # can be done in one line, separating for readability
           sed -i -e 's%<COMMIT>%'"${{ github.sha }}"'%' -e 's%<BRANCH>%'"${{ github.ref }}"'%' taskdef.json
           sed -i -e 's%<AWS_ACCOUNT_ID>%'"${{ secrets.AWS_ACCOUNT_ID }}"'%' taskdef.json
-          sed -i -e 's%<IMAGE_NAME>%'"${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/${{ secrets.APP_NAME }}-repo:dev"'%' taskdef.json
+          # sed -i -e 's%<IMAGE_NAME>%'"${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/${{ secrets.APP_NAME }}-repo:dev"'%' taskdef.json
           sed -i 's/<APP_NAME>/'${{ secrets.APP_NAME }}'/g' appspec.yml taskdef.json
           sed -i 's/<CONTAINER_NAME>/'${{ secrets.APP_NAME }}-container'/g' appspec.yml taskdef.json
           sed -i 's/<SERVICE_PORT>/'${{ secrets.SERVICE_PORT }}'/g' appspec.yml taskdef.json
