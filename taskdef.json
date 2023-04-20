@@ -11,7 +11,7 @@
       "environment": [
         {
           "name": "IMAGE",
-          "value": "<IMAGE_NAME>"
+          "value": "<IMAGE1_NAME>"
         },
         {
           "name": "COMMIT",
@@ -34,8 +34,8 @@
           "value": "development"
         }
       ],
-      "image": "<IMAGE_NAME>",
-      "name": "<APP_NAME>"
+      "image": "<IMAGE1_NAME>",
+      "name": "<CONTAINER_NAME>"
     }
   ],
   "executionRoleArn": "arn:aws:iam::<AWS_ACCOUNT_ID>:role/ECSTask",
