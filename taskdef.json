@@ -42,5 +42,7 @@
   "taskRoleArn": "arn:aws:iam::<AWS_ACCOUNT_ID>:role/ECSTask",
   "family": "<APP_NAME>",
   "requiresCompatibilities": ["FARGATE"],
-  "networkMode": "awsvpc"
+  "networkMode": "awsvpc",
+  "cpu": 256,
+  "memory": 512
 }
