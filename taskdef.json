@@ -34,8 +34,12 @@
           "value": "development"
         }
       ],
-      "image": "<IMAGE1_NAME>:dev",
-      "name": "<CONTAINER_NAME>"
+      "image": "<IMAGE1_NAME>",
+      "name": "<CONTAINER_NAME>",
+      "dockerLabels": {
+        "environment": "dev",
+        "service": "api-server-service"
+      }
     }
   ],
   "executionRoleArn": "arn:aws:iam::<AWS_ACCOUNT_ID>:role/ECSTask",
