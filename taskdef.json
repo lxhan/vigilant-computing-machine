@@ -35,11 +35,7 @@
         }
       ],
       "image": "<IMAGE1_NAME>",
-      "name": "<CONTAINER_NAME>",
-      "dockerLabels": {
-        "environment": "dev",
-        "service": "api-server-service"
-      }
+      "name": "<CONTAINER_NAME>"
     }
   ],
   "executionRoleArn": "arn:aws:iam::<AWS_ACCOUNT_ID>:role/ECSTask",
