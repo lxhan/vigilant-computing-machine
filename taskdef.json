@@ -34,7 +34,7 @@
           "value": "development"
         }
       ],
-      "image": "<IMAGE1_NAME>",
+      "image": "<IMAGE1_NAME>:dev",
       "name": "<CONTAINER_NAME>"
     }
   ],
