@@ -38,8 +38,8 @@
       "name": "<CONTAINER_NAME>"
     }
   ],
-  "executionRoleArn": "arn:aws:iam::<AWS_ACCOUNT_ID>:role/<APP_NAME>-ecs-task-role",
-  "taskRoleArn": "arn:aws:iam::<AWS_ACCOUNT_ID>:role/ECSTask",
+  "executionRoleArn": "arn:aws:iam::<AWS_ACCOUNT_ID>:role/<APP_NAME>-ecs-exec-role",
+  "taskRoleArn": "arn:aws:iam::<AWS_ACCOUNT_ID>:role/<APP_NAME>-ecs-task-role",
   "family": "<APP_NAME>",
   "requiresCompatibilities": ["FARGATE"],
   "networkMode": "awsvpc",
