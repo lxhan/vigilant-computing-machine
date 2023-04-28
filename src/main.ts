@@ -10,6 +10,8 @@ async function main() {
 
   await initRoutes(server);
 
+  console.log(process.env.SECRETS);
+
   server.listen(
     { port: server.config.PORT, host: '0.0.0.0' },
     (err, address) => {
