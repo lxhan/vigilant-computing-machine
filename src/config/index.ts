@@ -14,5 +14,5 @@ const schema = {
 
 export const ENV_OPTIONS = {
   schema: schema,
-  dotenv: false,
+  data: process.env.SECRETS,
 };
