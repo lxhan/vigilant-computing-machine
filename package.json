@@ -6,7 +6,8 @@
   "scripts": {
     "build": "rm -rf dist && tsc -p tsconfig.json",
     "start": "node dist/main.js",
-    "prestart": "npm run build"
+    "prestart": "npm run build",
+    "pwd": "pwd && ls -la"
   },
   "keywords": [],
   "author": "",
