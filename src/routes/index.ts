@@ -7,6 +7,10 @@ const init = async (server: FastifyInstance) => {
   server.get('/health', async (_, reply) => {
     reply.status(200).send({ ok: true });
   });
+
+  server.get('/config', async (_, reply) => {
+    reply.status(200).send({ ok: config.JWT_SECRET });
+  });
 };
 
 export default init;

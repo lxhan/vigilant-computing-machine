@@ -3,15 +3,15 @@
     {
       "portMappings": [
         {
-          "hostPort": 80,
+          "hostPort": 4000,
           "protocol": "tcp",
-          "containerPort": "<SERVICE_PORT>"
+          "containerPort": 4000
         }
       ],
       "environment": [
         {
           "name": "IMAGE",
-          "value": "<IMAGE_NAME>"
+          "value": "<IMAGE1_NAME>"
         },
         {
           "name": "COMMIT",
@@ -34,13 +34,15 @@
           "value": "development"
         }
       ],
-      "image": "<IMAGE_NAME>",
-      "name": "<APP_NAME>"
+      "image": "<IMAGE1_NAME>",
+      "name": "<CONTAINER_NAME>"
     }
   ],
-  "executionRoleArn": "arn:aws:iam::<AWS_ACCOUNT_ID>:role/ECSTask",
-  "taskRoleArn": "arn:aws:iam::<AWS_ACCOUNT_ID>:role/ECSTask",
+  "executionRoleArn": "arn:aws:iam::<AWS_ACCOUNT_ID>:role/<APP_NAME>-ecs-exec-role",
+  "taskRoleArn": "arn:aws:iam::<AWS_ACCOUNT_ID>:role/<APP_NAME>-ecs-task-role",
   "family": "<APP_NAME>",
   "requiresCompatibilities": ["FARGATE"],
-  "networkMode": "awsvpc"
+  "networkMode": "awsvpc",
+  "cpu": "256",
+  "memory": "512"
 }
