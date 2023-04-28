@@ -12,7 +12,9 @@ const schema = {
   },
 };
 
+const data = JSON.parse(process.env.SECRETS!);
+
 export const ENV_OPTIONS = {
-  schema: schema,
-  data: process.env.SECRETS,
+  schema,
+  data,
 };
