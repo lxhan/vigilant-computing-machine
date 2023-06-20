@@ -22,16 +22,8 @@
           "value": "<BRANCH>"
         },
         {
-          "name": "ENVIRONMENT",
-          "value": "server"
-        },
-        {
           "name": "PORT",
           "value": "<SERVICE_PORT>"
-        },
-        {
-          "name": "NODE_ENV",
-          "value": "development"
         }
       ],
       "image": "<IMAGE1_NAME>",
@@ -40,7 +32,7 @@
   ],
   "executionRoleArn": "arn:aws:iam::<AWS_ACCOUNT_ID>:role/<APP_NAME>-ecs-exec-role",
   "taskRoleArn": "arn:aws:iam::<AWS_ACCOUNT_ID>:role/<APP_NAME>-ecs-task-role",
-  "family": "<APP_NAME>",
+  "family": "<APP_NAME>-task",
   "requiresCompatibilities": ["FARGATE"],
   "networkMode": "awsvpc",
   "cpu": "256",

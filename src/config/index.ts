@@ -3,7 +3,7 @@ const schema = {
   required: ['PORT', 'JWT_SECRET'],
   properties: {
     PORT: {
-      type: 'string',
+      type: 'number',
       default: 4000,
     },
     JWT_SECRET: {
@@ -13,6 +13,6 @@ const schema = {
 };
 
 export const ENV_OPTIONS = {
-  schema: schema,
+  schema,
   dotenv: true,
 };
